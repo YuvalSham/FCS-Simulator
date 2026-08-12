@@ -1,0 +1,16 @@
+--bare
+-I
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug
+-I
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/myGUI
+-I
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug
+-I
+/opt/homebrew/share/qt/qml
+--resource
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/.qt/rcc/qmake_myGUI.qrc
+--resource
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/.qt/rcc/appmyGUI_raw_qml_0.qrc
+/Users/yuvalshamilov/Documents/Qt/myGUI/Main.qml
+--json
+/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/appmyGUI_qmllint.json
