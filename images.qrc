@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>exoduval.png</file>
+    </qresource>
+</RCC>

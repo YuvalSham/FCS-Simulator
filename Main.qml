@@ -1,8 +1,20 @@
 import QtQuick
 
 Window {
-    width: 640
-    height: 480
+    id: main
+    width: 1920
+    height: 1080
     visible: true
     title: qsTr("Hello World")
+
+
+    Background{
+
+    }
+
+    VColumns{
+
+    }
+
+
 }

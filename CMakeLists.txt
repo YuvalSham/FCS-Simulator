@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(myGUI VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_AUTORCC ON) #reminder: !!!! write it down somewhere !!!!
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
@@ -10,13 +11,21 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(appmyGUI
     main.cpp
+
 )
 
 qt_add_qml_module(appmyGUI
     URI myGUI
     QML_FILES
         Main.qml
+        Background.qml
+        SystemConfig.qml
+        RESOURCES images.qrc
+        QML_FILES MButton.qml
+        QML_FILES VColumns.qml
 )
+set_source_files_properties(MySingleton.qml
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
