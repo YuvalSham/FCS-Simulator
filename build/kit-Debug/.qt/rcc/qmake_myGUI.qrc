@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/myGUI">
-    <file alias="qmldir">/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/myGUI/qmldir</file>
-  </qresource>
-</RCC>
-

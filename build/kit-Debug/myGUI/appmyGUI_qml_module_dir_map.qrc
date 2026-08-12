@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/">
-    <file alias="/qt/qml/myGUI">/Users/yuvalshamilov/Documents/Qt/myGUI/build/kit-Debug/myGUI</file>
-
-  </qresource>
-</RCC>
