@@ -1,102 +1,43 @@
 import QtQuick
 
 Item {
-    id:vertical_column
+    id: vertical_column
 
-    Item{
-        id:vertical_L_column_space
+    property double columnWidth: main.width / 2
+    property double columnHeight: main.height
+    property bool isRightSide: false
 
-        width: main.width/2
-        height: main.height
-        x:0
-        opacity: 0.7
+    property alias button1: columnButtons_1
+    property alias button2: columnButtons_2
+    property alias button3: columnButtons_3
+    property alias button4: columnButtons_4
 
-        MouseArea{
-            anchors.fill: parent
-            onClicked:
-                console.log("Left panel been clicked")
+    width: columnWidth
+    height: columnHeight
+
+    Column {
+        id: column_container
+
+        width: parent.width
+
+        topPadding: main.height / 5
+        spacing: main.height / 10
+
+        ObjButton {
+            id: columnButtons_1
+            x: isRightSide ? main.width-buttonWidth+buttonBorderWidth : -border.width
         }
-
-        Column{
-            id: column_left
-
-            PropertyAnimation on x{
-                to: - 200
-                duration: 1000
-            }
-
-            topPadding: main.height/5
-            leftPadding: -10
-            spacing: main.height/10
-
-            MButton{
-                id: vertical_Lbutton_one
-                button_name: "Index"
-
-            }
-            MButton{
-                id: vertical_Lbutton_two
-                button_name: "Mode"
-
-            }
-            MButton{
-                id: vertical_Lbutton_three
-                button_name: "Maps"
-
-            }
-            MButton{
-                id: vertical_Lbutton_tree
-                button_name: "Set Range"
-
-            }
+        ObjButton {
+            id: columnButtons_2
+            x: isRightSide ? main.width-buttonWidth+buttonBorderWidth : -border.width
+        }
+        ObjButton {
+            id: columnButtons_3
+            x: isRightSide ? main.width-buttonWidth+buttonBorderWidth : -border.width
+        }
+        ObjButton {
+            id: columnButtons_4
+            x: isRightSide ? main.width-buttonWidth+buttonBorderWidth : -border.width
         }
     }
-
-
-
-
-    Item{
-        id: vertical_R_column_space
-        width: main.width/2
-        height: main.height
-        x: main.width / 2
-        opacity:0.8
-
-        MouseArea{
-            anchors.fill: parent
-            onClicked:
-                console.log("Right panel been clicked")
-        }
-
-        Column{
-            id: column_right
-
-            x: parent.width - vertical_Rbutton_one.width + 10 // Increase by 10 because of right padding conflict
-            topPadding: main.height/5
-            spacing: main.height/10
-
-            PropertyAnimation on x{
-                to: main.width-965
-                duration: 1000
-            }
-
-            MButton{
-                id: vertical_Rbutton_one
-                button_name: "Camera"
-            }
-            MButton{
-                id: vertical_Rbutton_two
-                button_name: "FOV"
-            }
-            MButton{
-                id: vertical_Rbutton_three
-                button_name: "Functions"
-            }
-            MButton{
-                id: vertical_Rbutton_tree
-                button_name: "Reticale"
-            }
-        }
-    }
-
 }

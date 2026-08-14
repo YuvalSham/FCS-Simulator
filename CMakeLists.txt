@@ -6,7 +6,7 @@ set(CMAKE_AUTORCC ON) #reminder: !!!! write it down somewhere !!!!
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
-
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia)
 qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(appmyGUI
@@ -21,10 +21,14 @@ qt_add_qml_module(appmyGUI
         Background.qml
         SystemConfig.qml
         RESOURCES images.qrc
-        QML_FILES MButton.qml
+        QML_FILES ObjButton.qml
         QML_FILES VColumns.qml
+        QML_FILES VideoCamera.qml
+        QML_FILES MainScreen.qml
+        QML_FILES Reticle.qml
+        QML_FILES BRow.qml
 )
-set_source_files_properties(MySingleton.qml
+set_source_files_properties(SystemConfig.qml
     PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -36,10 +40,12 @@ set_target_properties(appmyGUI PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist
 )
 
 target_link_libraries(appmyGUI
     PRIVATE Qt6::Quick
+    Qt6::Multimedia
 )
 
 include(GNUInstallDirs)
