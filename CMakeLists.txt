@@ -1,55 +1,65 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(myGUI VERSION 0.1 LANGUAGES CXX)
+project(MFDU VERSION 2.0 LANGUAGES CXX)
 
-set(CMAKE_AUTORCC ON) #reminder: !!!! write it down somewhere !!!!
+set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia)
 qt_standard_project_setup(REQUIRES 6.8)
 
-qt_add_executable(appmyGUI
-    main.cpp
-
+# הגדרת קובץ האייקון עבור macOS
+set(MACOSX_ICON ${CMAKE_CURRENT_SOURCE_DIR}/appIcon.icns)
+set_source_files_properties(${MACOSX_ICON} PROPERTIES
+    MACOSX_PACKAGE_LOCATION "Resources"
 )
 
-qt_add_qml_module(appmyGUI
+qt_add_executable(appMFDU
+    main.cpp
+    images.qrc
+    Info.plist
+    ${MACOSX_ICON}
+)
+
+set_source_files_properties(SystemConfig.qml
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+)
+
+qt_add_qml_module(appMFDU
     URI myGUI
     QML_FILES
         Main.qml
         Background.qml
         SystemConfig.qml
-        RESOURCES images.qrc
-        QML_FILES ObjButton.qml
-        QML_FILES VColumns.qml
-        QML_FILES VideoCamera.qml
-        QML_FILES MainScreen.qml
-        QML_FILES Reticle.qml
-        QML_FILES BRow.qml
+        ObjButton.qml
+        VColumns.qml
+        VideoCamera.qml
+        MainScreen.qml
+        Reticle.qml
+        BRow.qml
 )
-set_source_files_properties(SystemConfig.qml
-    PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-set_target_properties(appmyGUI PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appmyGUI
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+set_target_properties(appMFDU PROPERTIES
+    OUTPUT_NAME "MFDU ver 2.0"
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.yuval.mfdu
+    MACOSX_BUNDLE_BUNDLE_NAME "MFDU ver 2.0"
+    MACOSX_BUNDLE_ICON_FILE "appIcon.icns"
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
-target_link_libraries(appmyGUI
-    PRIVATE Qt6::Quick
-    Qt6::Multimedia
+target_link_libraries(appMFDU
+    PRIVATE
+        Qt6::Quick
+        Qt6::Multimedia
 )
 
 include(GNUInstallDirs)
-install(TARGETS appmyGUI
+install(TARGETS appMFDU
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
