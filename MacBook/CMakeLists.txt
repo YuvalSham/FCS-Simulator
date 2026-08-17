@@ -48,6 +48,7 @@ target_link_libraries(appMFDU
     PRIVATE
         Qt6::Quick
         Qt6::Multimedia
+        CoreLib
 )
 
 include(GNUInstallDirs)
