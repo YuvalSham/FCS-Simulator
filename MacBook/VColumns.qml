@@ -27,19 +27,23 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        spacing: parent.height * 0.03
+        spacing: parent.height * SystemConfig.columnSpacingRatio
 
         ObjButton {
             id: columnButtons_1
+            isRightSide: vertical_column.isRightSide
         }
         ObjButton {
             id: columnButtons_2
+            isRightSide: vertical_column.isRightSide
         }
         ObjButton {
             id: columnButtons_3
+            isRightSide: vertical_column.isRightSide
         }
         ObjButton {
             id: columnButtons_4
+            isRightSide: vertical_column.isRightSide
         }
     }
 }

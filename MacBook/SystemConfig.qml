@@ -2,15 +2,16 @@ pragma Singleton
 import QtQuick
 
 QtObject {
-    property color defaultButtonColor: "#001155"
-    property color onHoverButtonColor: "#555577"
-    property color borderButtonColor: "#dadafa"
-    property color textButtonColor: "#bbfa88"
+    property color defaultButtonColor: "#66001155"
+    property color onHoverButtonColor: "#66555577"
+    property color borderButtonColor: "#ffdadafa"
+    property color textButtonColor: "#ffbbfa88"
 
     property int buttonBorderWidth: 2
     property real buttonWidthRatio: 10
     property real buttonHeightRatio: 12
     property real textSizeRatio: 0.3
+    property real columnSpacingRatio: 0.09
 
     // BRow configurations
     property int bRowBottomMargin: -50
@@ -20,11 +21,11 @@ QtObject {
     property real bRowItemDefaultWidth: 90
     property real bRowItemHeightMultiplier: 1.5
 
-    property color bRowOuterColor: "#40bbfa88"
-    property color bRowOuterBorderColor: "#80bbfa88"
+    property color bRowOuterColor: "#4000bb22"
+    property color bRowOuterBorderColor: "#80dadafa"
     property real bRowOuterBorderWidth: 1.5
 
-    property color bRowMiddleColor: "#60bbfa88"
+    property color bRowMiddleColor: "#60001155"
     property real bRowMiddleTopMarginRatio: 0.08
     property real bRowMiddleSizeRatio: 0.84
 

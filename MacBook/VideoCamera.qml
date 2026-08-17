@@ -8,15 +8,22 @@ Item {
     clip: true
 
     property alias currentFovName: fov_text.text
-    // 0: Off, 1: Mac Camera, 2: iPhone Camera
     property int cameraState: 0
     property string currentCameraName: "Off"
 
-    function getMacCamera() {
+    Component.onCompleted: {
+        console.log("--- Available Cameras ---")
+        const devices = mediaDevices.videoInputs
+        for (let i = 0; i < devices.length; ++i) {
+            console.log("Camera " + i + ": " + devices[i].description)
+        }
+    }
+
+    function getFirstCamera() {
         const devices = mediaDevices.videoInputs
         for (let i = 0; i < devices.length; ++i) {
             const desc = devices[i].description.toLowerCase()
-            if (!desc.includes("iphone") && (desc.includes("facetime") || desc.includes("built-in") || desc.includes("mac"))) {
+            if (desc.includes("back") || desc.includes("rear")) {
                 return devices[i]
             }
         }
@@ -24,14 +31,21 @@ Item {
     }
 
     function getIPhoneCamera() {
-        const devices = mediaDevices.videoInputs
-        for (let i = 0; i < devices.length; ++i) {
-            if (devices[i].description.toLowerCase().includes("iphone")) {
-                return devices[i]
+            const devices = mediaDevices.videoInputs
+            for (let i = 0; i < devices.length; ++i) {
+                const desc = devices[i].description.toLowerCase()
+                if (desc.includes("iphone")) {
+                    return devices[i]
+                }
             }
+            for (let i = 0; i < devices.length; ++i) {
+                const desc = devices[i].description.toLowerCase()
+                if (!desc.includes("built-in") && !desc.includes("facetime") && !desc.includes("front")) {
+                    return devices[i]
+                }
+            }
+            return null
         }
-        return null
-    }
 
     function toggleCamera() {
         cameraState = (cameraState + 1) % 3
@@ -40,10 +54,10 @@ Item {
             currentCameraName = "Off"
             camera.stop()
         } else if (cameraState === 1) {
-            const macCam = getMacCamera()
-            if (macCam) {
-                camera.cameraDevice = macCam
-                currentCameraName = macCam.description
+            const firstCam = getFirstCamera()
+            if (firstCam) {
+                camera.cameraDevice = firstCam
+                currentCameraName = firstCam.description
                 camera.start()
             } else {
                 cameraState = 2
@@ -73,7 +87,7 @@ Item {
             videoOutput.scale = 1.0
         } else {
             camera_root.currentFovName = "Narrow"
-            videoOutput.scale = 7.5
+            videoOutput.scale = 7.0
         }
     }
 
@@ -96,6 +110,7 @@ Item {
         fillMode: VideoOutput.PreserveAspectCrop
         visible: camera.active
         scale: 1.0
+        orientation: cameraState === 1 ? 180 : 0
 
         Behavior on scale {
             NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }

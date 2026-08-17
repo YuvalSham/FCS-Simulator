@@ -8,7 +8,12 @@ Item {
 
     property bool panelsHidden: false
 
-    Background {}
+    Image {
+        id: background_image
+        source: "qrc:/exoduval.png"
+        anchors.fill: parent
+    }
+
 
     VideoCamera { id: videoCamera }
     Reticle { id: reticle }

@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    // בקשת הרשאה למצלמה בזמן עליית האפליקציה
     QCameraPermission cameraPermission;
     switch (app.checkPermission(cameraPermission)) {
     case Qt::PermissionStatus::Undetermined:
